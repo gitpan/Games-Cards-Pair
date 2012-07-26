@@ -1,0 +1,18 @@
+Build.PL
+Changes
+lib/Games/Cards/Pair.pm
+lib/Games/Cards/Pair/Card.pm
+script/play-pair.pl
+Makefile.PL
+MANIFEST
+MANIFEST.SKIP
+SIGNATURE
+README
+t/00-load.t
+t/01-Games-Cards-Pair.t
+t/02-Games-Cards-Pair-Card.t
+t/manifest.t
+t/pod.t
+META.yml
+META.json
+SIGNATURE    Added here by Module::Build
