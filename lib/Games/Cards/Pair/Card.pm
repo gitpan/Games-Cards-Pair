@@ -16,11 +16,11 @@ Games::Cards::Pair::Card - Object representation of a card.
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 Readonly my $SUITS => { 'Clubs' => 1, 'Diamonds' => 1, 'Hearts' => 1, 'Spades' => 1 };
 

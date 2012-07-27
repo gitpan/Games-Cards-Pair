@@ -11,11 +11,12 @@ my $builder = Module::Build->new(
     add_to_cleanup     => [ 'Games-Cards-Pair-*' ],
     configure_requires => { 'Module::Build' => 0.40 },
     build_requires     => {
-        'Test::More'      => 0,
-        'List::Util'      => 1.19,
-        'List::MoreUtils' => 0.33,
-        'Mouse'           => 0.93,
-        'Readonly'        => 1.03,
+        'Test::More'         => 0,
+        'Attribute::Memoize' => 1.01,
+        'List::Util'         => 1.19,
+        'List::MoreUtils'    => 0.33,
+        'Mouse'              => 0.93,
+        'Readonly'           => 1.03,
     },
 );
 

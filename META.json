@@ -16,6 +16,7 @@
    "prereqs" : {
       "build" : {
          "requires" : {
+            "Attribute::Memoize" : "1.01",
             "List::MoreUtils" : "0.33",
             "List::Util" : "1.19",
             "Mouse" : "0.93",
@@ -32,11 +33,11 @@
    "provides" : {
       "Games::Cards::Pair" : {
          "file" : "lib/Games/Cards/Pair.pm",
-         "version" : "0.01"
+         "version" : "0.02"
       },
       "Games::Cards::Pair::Card" : {
          "file" : "lib/Games/Cards/Pair/Card.pm",
-         "version" : "0.01"
+         "version" : "0.02"
       }
    },
    "release_status" : "stable",
@@ -45,5 +46,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.01"
+   "version" : "0.02"
 }
