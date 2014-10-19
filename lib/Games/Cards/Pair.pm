@@ -1,10 +1,21 @@
 package Games::Cards::Pair;
 
+$Games::Cards::Pair::VERSION = '0.04';
+
+=head1 NAME
+
+Games::Cards::Pair - Interface to the Pelmanism (Pair) Card Game.
+
+=head1 VERSION
+
+Version 0.04
+
+=cut
+
 use 5.006;
 use strict; use warnings;
 
 use overload ( '""'  => \&as_string );
-use Carp;
 use Mouse;
 use Mouse::Util::TypeConstraints;
 
@@ -13,18 +24,6 @@ use Data::Dumper;
 use Attribute::Memoize;
 use List::Util qw(shuffle);
 use List::MoreUtils qw/first_index/;
-
-=head1 NAME
-
-Games::Cards::Pair - Interface to the Pelmanism (Pair) Card Game.
-
-=head1 VERSION
-
-Version 0.03
-
-=cut
-
-our $VERSION = '0.03';
 
 type 'ZeroOrOne' => where { /^[1|0]$/ };
 
@@ -45,15 +44,12 @@ Joker will not have any suit.
 
 =cut
 
-sub BUILD
-{
-    my $self  = shift;
-    my $cards = [];
+sub BUILD {
+    my ($self) = @_;
 
-    foreach my $suit ('Clubs', 'Diamonds', 'Hearts', 'Spades')
-    {
-        foreach my $value ('Ace','2','3','4','5','6','7','8','9','10','Jack','Queen','King')
-        {
+    my $cards = [];
+    foreach my $suit ('Clubs', 'Diamonds', 'Hearts', 'Spades') {
+        foreach my $value ('Ace','2','3','4','5','6','7','8','9','10','Jack','Queen','King') {
             push @$cards, Games::Cards::Pair::Card->new({ suit => $suit, value => $value });
         }
     }
@@ -87,35 +83,30 @@ card from the deck.
 
 =cut
 
-sub draw
-{
-    my $self = shift;
-    my $card = shift;
+sub draw {
+    my ($self, $card) = @_;
 
     $self->{count}++;
-    if (not defined $card)
-    {
+    if (not defined $card) {
         $card = $self->_draw();
         print "Card 1 picked $card.\n" if $self->debug;
         return $card;
     }
 
-    croak("ERROR: Invalid card received.\n")
-        unless (ref($card) eq 'Games::Cards::Pair::Card');
+    die("ERROR: Invalid card received.\n") unless (ref($card) eq 'Games::Cards::Pair::Card');
 
     my $new = $self->_seen($card);
-    if (defined $new)
-    {
+    if (defined $new) {
         print "Card 2 picked previously seen $new.\n" if $self->debug;
         return $new;
     }
 
     $new = $self->_draw();
-    if (defined $new)
-    {
+    if (defined $new) {
         push @{$self->{seen}}, $new;
         print "Card 2 picked $new.\n" if $self->debug;
     }
+
     return $new;
 }
 
@@ -134,18 +125,13 @@ Check if the two given cards are the same and act accordingly.
 
 =cut
 
-sub process
-{
-    my $self = shift;
-    my $card = shift;
-    my $new  = shift;
+sub process {
+    my ($self, $card, $new) = @_;
 
-    if ($new->equal($card))
-    {
+    if ($new->equal($card)) {
         $self->_process($new, $card);
     }
-    else
-    {
+    else {
         $self->{deck}->{$new->index}  = $new;
         $self->{deck}->{$card->index} = $card;
     }
@@ -165,9 +151,9 @@ Returns 1 or 0 depending if the deck is empty or not.
 
 =cut
 
-sub is_over
-{
-    my $self = shift;
+sub is_over {
+    my ($self) = @_;
+
     return 1 if (scalar(@{$self->{available}}) == 0);
     return 0;
 }
@@ -185,17 +171,16 @@ Returns deck arranged as 6 x 9 blocks. This is overloaded as string context.
 
 =cut
 
-sub as_string
-{
-    my $self = shift;
+sub as_string {
+    my ($self) = @_;
 
     my $deck = '';
-    foreach my $i (1..54)
-    {
+    foreach my $i (1..54) {
         my $card = $self->{deck}->{$i-1};
         $deck .= sprintf("[ %s ] ", defined($card)?'C':' ');
         $deck .= "\n" if ($i % 9 == 0);
     }
+
     return $deck;
 }
 
@@ -207,44 +192,37 @@ Returns all the matching pair, if any found, from the bank.
     use Games::Cards::Pair;
 
     my $game = Games::Cards::Pair->new();
-    do
-    {
+    do {
         my $card1 = $game->draw();
         my $card2 = $game->draw($card1);
         $game->process($card1, $card2);
-    }
-    until ($game->is_over());
+    } until ($game->is_over());
 
     print "Matched cards:\n" . $game->get_matched_pairs();
 
 =cut
 
-sub get_matched_pairs
-{
-    my $self   = shift;
+sub get_matched_pairs {
+    my ($self) = @_;
+
     my $string = '';
-    foreach (@{$self->{bank}})
-    {
+    foreach (@{$self->{bank}}) {
         $string .= sprintf("%s %s\n", $_->[0], $_->[1]);
     }
+
     return $string;
 }
 
-sub _save
-{
-    my $self  = shift;
-    my @cards = @_;
-    croak("ERROR: Expecting atleast a pair of cards.\n")
-        unless (scalar(@cards) == 2);
+sub _save {
+    my ($self, @cards) = @_;
+
+    die("ERROR: Expecting atleast a pair of cards.\n") unless (scalar(@cards) == 2);
 
     push @{$self->{bank}}, [@cards];
 }
 
-sub _process
-{
-    my $self = shift;
-    my $card = shift;
-    my $new  = shift;
+sub _process {
+    my ($self, $card, $new) = @_;
 
     print "MATCHED !!!!!!!!!!!\n" if $self->debug;
     $self->{deck}->{$new->index}  = undef;
@@ -252,54 +230,46 @@ sub _process
     $self->_save($card, $new);
 
     my $index = first_index { $_ == $new->index } @{$self->{available}};
-    splice(@{$self->{available}}, $index, 1)
-        if ($index != -1);
+    splice(@{$self->{available}}, $index, 1) if ($index != -1);
 
     $index = first_index { $_ == $card->index } @{$self->{available}};
-    splice(@{$self->{available}}, $index, 1)
-        if ($index != -1);
+    splice(@{$self->{available}}, $index, 1) if ($index != -1);
 }
 
-sub _index
-{
-    my $self  = shift;
-    my $cards = shift;
+sub _index {
+    my ($self, $cards) = @_;
 
     $cards = [shuffle @{$cards}];
     my $index  = 0;
-    foreach my $card (@{$cards})
-    {
+    foreach my $card (@{$cards}) {
         $card->index($index);
         $self->{deck}->{$index} = $card;
         $index++;
     }
 }
 
-sub _draw
-{
-    my $self   = shift;
+sub _draw {
+    my ($self) = @_;
+
     my @random = shuffle(@{$self->{available}});
     my $index  = shift @random;
-    return $self->{deck}->{$index}
-        if defined $index;
+
+    return $self->{deck}->{$index} if defined $index;
     return;
 }
 
-sub _seen :Memoize
-{
-    my $self = shift;
-    my $card = shift;
+sub _seen :Memoize {
+    my ($self, $card) = @_;
 
     my $index = 0;
-    foreach (@{$self->{seen}})
-    {
-        if ($card->equal($_))
-        {
+    foreach (@{$self->{seen}}) {
+        if ($card->equal($_)) {
             splice(@{$self->{seen}}, $index, 1);
             return $_;
         }
         $index++;
     }
+
     return;
 }
 
@@ -343,7 +313,7 @@ L<http://search.cpan.org/dist/Games-Cards-Pair/>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2012 Mohammad S Anwar.
+Copyright 2012 - 2014 Mohammad S Anwar.
 
 This  program  is  free software;  you can redistribute it and/or modify it under the terms of
 either:  the  GNU  General Public License as published by the Free Software Foundation; or the
