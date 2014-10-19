@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.68.
+signed via the Module::Signature module, version 0.73.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -14,16 +14,13 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 d82a2f978c2ab8bb96199fce475a75ff1b233385 Build.PL
-SHA1 c5cd2687eb47142e910b2f607535792bbf7bbd04 Changes
-SHA1 3d45ec91e4a39bec10bd333d8ba79172a5f07495 MANIFEST
-SHA1 7d20e4e840781030202bb045d5ab81b3fd1b68b0 MANIFEST.SKIP
-SHA1 0c4ef81a9433daa67a2f98544f26476c5d5beb5b META.json
-SHA1 d84fc1557dc335e3d99b8d149d7a4ed4f002aaf6 META.yml
+SHA1 3d981876c290886f3e9eb100261dd9a913c609d9 Changes
+SHA1 b6bfc7031735dffc30c31a791fd0e86c63d4b5a4 MANIFEST
+SHA1 5f29cdcbfacb9c46ac155fff9844aceeb064aef1 MANIFEST.SKIP
 SHA1 b618a7d1811ae108ee4cfd22c8131a7193fd81ed Makefile.PL
 SHA1 cf6245aa9d3b5f5f6ad43cdc239188d57452220f README
-SHA1 44f769c90f1974a3b0cfe568e698d803521ad1d7 lib/Games/Cards/Pair.pm
-SHA1 e6e9c0cdf5f17d0d6e8db0f3dc2284fbcca44a00 lib/Games/Cards/Pair/Card.pm
+SHA1 37a7d3eb3c11bc3b22c4e31b2cd7e18d35f8d2c0 lib/Games/Cards/Pair.pm
+SHA1 0c098cbfab458ace945907203bdf827147ddba81 lib/Games/Cards/Pair/Card.pm
 SHA1 3ba415c9b6ac33c4bc41d419ab6cd4b4ee08c511 script/play-pair.pl
 SHA1 852981048c6975f380925ffbc300cc742b367630 t/00-load.t
 SHA1 709b901c22ee7418826ab112c7d62f5fe51af495 t/01-Games-Cards-Pair.t
@@ -31,13 +28,13 @@ SHA1 a4f0bc3641a2f0459f7036ca03b1297e804c857b t/02-Games-Cards-Pair-Card.t
 SHA1 dceb9f9002c01ba38fb849fd3e8771c3d295f86b t/manifest.t
 SHA1 1abacf3a7c24642711bc71851ffe79e148b3683e t/pod.t
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.11 (MingW32)
+Version: GnuPG v1
 
-iQEcBAEBAgAGBQJQEnHNAAoJENoXJXWo7C/phDQH/3Cl2i1VDFZEHzy23rcVuEXd
-xem+2+IWlwPBw0hgMHBmpYOD0b5jBI4AjwkkarFlPEWZe7/hrhwXCfOzcQvGVGhk
-F+o79AIRJ8DlFhv1KIvKi4BKrNaQiJwWvqIRFOZ2LXtxR9XFJdybYR+riIphXmQb
-BdX/RSI0MWCL74jN2Ae892tEX8YnIeoPmxKdNFLeMVWoDTo3aUxvomlpkhwPx7V8
-c5dkHmff+UJy5ICIKr8NYOLuBYVR+8YT35/y5xKg/5Kkl4F2txsVC7ZW4NaF8Clq
-1ha2dfwVvFgAoKMRLvyG2C5yznB3LUyG9mOvu8uMFdBsgIIIbHP5I65ssKTdQe4=
-=H4Lc
+iQEcBAEBAgAGBQJUQ2+uAAoJENoXJXWo7C/p57AH/3xg7I50/fZlTKyGdeDVSiE0
+BzPZJhnL8tPvsLpQSmTvwz2cYoMzq95yuo8sgW+KmoHo0P8ZNQcQtddB2woG+vyW
+luWHxnoeVQA0KjgcR4+1gcEHMSh+Ykc5VsAYN9OLgScX7r6ZU1NNhlN8qJvhr9ps
+09n9LyFXZmHTez14HagideSWoVy2T39vp2lJuvdgkhxJeJ3lTV/tkB9/51CkL36I
+d2stXtx1bWSmYqfDDmsIIaH3gJrok0HtQcGJHIfNvuSL4ItLCDuqnoaHi0qEFYPh
+KtYbsF1cXVFotA3DgMFz+jD+SSTdQTXdNlxvNcdMvCGiMn1KFIaePZFlnU2Dl3E=
+=NqIb
 -----END PGP SIGNATURE-----

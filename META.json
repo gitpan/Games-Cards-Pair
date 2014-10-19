@@ -4,7 +4,7 @@
       "Mohammad S Anwar <mohammad.anwar@yahoo.com>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4001, CPAN::Meta::Converter version 2.120630",
+   "generated_by" : "ExtUtils::MakeMaker version 6.66, CPAN::Meta::Converter version 2.141520",
    "license" : [
       "perl_5"
    ],
@@ -13,38 +13,35 @@
       "version" : "2"
    },
    "name" : "Games-Cards-Pair",
+   "no_index" : {
+      "directory" : [
+         "t",
+         "inc"
+      ]
+   },
    "prereqs" : {
       "build" : {
          "requires" : {
-            "Attribute::Memoize" : "1.01",
-            "List::MoreUtils" : "0.33",
-            "List::Util" : "1.19",
-            "Mouse" : "0.93",
-            "Readonly" : "1.03",
-            "Test::More" : "0"
+            "ExtUtils::MakeMaker" : "0"
          }
       },
       "configure" : {
          "requires" : {
-            "Module::Build" : "0.4"
+            "ExtUtils::MakeMaker" : "0"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Attribute::Memoize" : "1.01",
+            "List::MoreUtils" : "0.33",
+            "List::Util" : "1.19",
+            "Module::Build" : "0.4",
+            "Mouse" : "0.93",
+            "Readonly" : "1.03",
+            "Test::More" : "0"
          }
       }
    },
-   "provides" : {
-      "Games::Cards::Pair" : {
-         "file" : "lib/Games/Cards/Pair.pm",
-         "version" : "0.02"
-      },
-      "Games::Cards::Pair::Card" : {
-         "file" : "lib/Games/Cards/Pair/Card.pm",
-         "version" : "0.02"
-      }
-   },
    "release_status" : "stable",
-   "resources" : {
-      "license" : [
-         "http://dev.perl.org/licenses/"
-      ]
-   },
-   "version" : "0.02"
+   "version" : "0.03"
 }

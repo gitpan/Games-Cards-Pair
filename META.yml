@@ -3,28 +3,26 @@ abstract: 'Interface to the Pelmanism (Pair) Card Game.'
 author:
   - 'Mohammad S Anwar <mohammad.anwar@yahoo.com>'
 build_requires:
-  Attribute::Memoize: 1.01
-  List::MoreUtils: 0.33
-  List::Util: 1.19
-  Mouse: 0.93
-  Readonly: 1.03
-  Test::More: 0
+  ExtUtils::MakeMaker: '0'
 configure_requires:
-  Module::Build: 0.4
+  ExtUtils::MakeMaker: '0'
 dynamic_config: 1
-generated_by: 'Module::Build version 0.4001, CPAN::Meta::Converter version 2.120630'
+generated_by: 'ExtUtils::MakeMaker version 6.66, CPAN::Meta::Converter version 2.141520'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
-  version: 1.4
+  version: '1.4'
 name: Games-Cards-Pair
-provides:
-  Games::Cards::Pair:
-    file: lib/Games/Cards/Pair.pm
-    version: 0.02
-  Games::Cards::Pair::Card:
-    file: lib/Games/Cards/Pair/Card.pm
-    version: 0.02
-resources:
-  license: http://dev.perl.org/licenses/
-version: 0.02
+no_index:
+  directory:
+    - t
+    - inc
+requires:
+  Attribute::Memoize: '1.01'
+  List::MoreUtils: '0.33'
+  List::Util: '1.19'
+  Module::Build: '0.4'
+  Mouse: '0.93'
+  Readonly: '1.03'
+  Test::More: '0'
+version: '0.03'

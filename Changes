@@ -1,7 +1,11 @@
 Revision history for Games-Cards-Pair
 
-0.02    Fri Jul 27 11:35:27 2012
-        - Added dependency check for Attribute::Memoize module.
+0.03  Sun Oct 19 08:50:15 2014
+      - Removed Build.PL file.
+      - Converted file to unix format.
 
-0.01    Thu Jul 26 12:00:00 2012
-        - First version, released.
+0.02  Fri Jul 27 11:35:27 2012
+      - Added dependency check for Attribute::Memoize module.
+
+0.01  Thu Jul 26 12:00:00 2012
+      - First version, released.
