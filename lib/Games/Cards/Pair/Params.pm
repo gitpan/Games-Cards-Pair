@@ -1,6 +1,6 @@
 package Games::Cards::Pair::Params;
 
-$Games::Cards::Pair::Params::VERSION = '0.06';
+$Games::Cards::Pair::Params::VERSION = '0.07';
 
 =head1 NAME
 
@@ -8,7 +8,7 @@ Games::Cards::Pair::Params - Placeholder for parameters for Games::Cards::Pair.
 
 =head1 VERSION
 
-Version 0.06
+Version 0.07
 
 =cut
 
@@ -50,8 +50,8 @@ L<https://github.com/Manwar/Games-Cards-Pair>
 
 =head1 BUGS
 
-Please  report  any  bugs  or feature  requests to C<bug-webservice-wikimapia  at
-rt.cpan.org>, or through the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Games-Cards-Pair>.
+Please report any bugs or feature requests to C<bug-games-cards-pair at rt.cpan.org>,
+or through the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Games-Cards-Pair>.
 I will be notified and then you'll automatically be notified of  progress on your
 bug as I make changes.
 

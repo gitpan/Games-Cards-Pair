@@ -16,4 +16,4 @@ no_index:
     - inc
 resources:
   repository: https://github.com/Manwar/Games-Cards-Pair.git
-version: '0.06'
+version: '0.07'

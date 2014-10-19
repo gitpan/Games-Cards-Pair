@@ -1,5 +1,8 @@
 Revision history for Games-Cards-Pair
 
+0.07  Sun Oct 19 15:40:15 2014
+      - Corrected the typo in the pod document of Games::Cards::Pair::Params package.
+
 0.06  Sun Oct 19 15:19:20 2014
       - Added the missing default 0 to 'count'.
 
