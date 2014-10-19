@@ -1,6 +1,6 @@
 package Games::Cards::Pair::Params;
 
-$Games::Cards::Pair::Params::VERSION = '0.05';
+$Games::Cards::Pair::Params::VERSION = '0.06';
 
 =head1 NAME
 
@@ -8,7 +8,7 @@ Games::Cards::Pair::Params - Placeholder for parameters for Games::Cards::Pair.
 
 =head1 VERSION
 
-Version 0.05
+Version 0.06
 
 =cut
 

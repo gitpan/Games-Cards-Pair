@@ -1,6 +1,6 @@
 package Games::Cards::Pair;
 
-$Games::Cards::Pair::VERSION = '0.05';
+$Games::Cards::Pair::VERSION = '0.06';
 
 =head1 NAME
 
@@ -8,7 +8,7 @@ Games::Cards::Pair - Interface to the Pelmanism (Pair) Card Game.
 
 =head1 VERSION
 
-Version 0.05
+Version 0.06
 
 =cut
 
@@ -29,7 +29,7 @@ has 'bank'      => (is => 'rw');
 has 'seen'      => (is => 'rw');
 has 'board'     => (is => 'rw');
 has 'available' => (is => 'ro');
-has 'count'     => (is => 'rw', isa => $Num);
+has 'count'     => (is => 'rw', isa => $Num,       default => sub { return 0 });
 has 'debug'     => (is => 'rw', isa => $ZeroOrOne, default => sub { return 0 });
 
 =head1 DESCRIPTION

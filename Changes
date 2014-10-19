@@ -1,5 +1,8 @@
 Revision history for Games-Cards-Pair
 
+0.06  Sun Oct 19 15:19:20 2014
+      - Added the missing default 0 to 'count'.
+
 0.05  Sun Oct 19 13:23:52 2014
       - Restructured the code using 'Moo'.
       - Added section 'Repository' to the pod document.
