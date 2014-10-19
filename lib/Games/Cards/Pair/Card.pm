@@ -1,6 +1,6 @@
 package Games::Cards::Pair::Card;
 
-$Games::Cards::Pair::Card::VERSION = '0.04';
+$Games::Cards::Pair::Card::VERSION = '0.05';
 
 =head1 NAME
 
@@ -8,31 +8,21 @@ Games::Cards::Pair::Card - Object representation of a card.
 
 =head1 VERSION
 
-Version 0.04
+Version 0.05
 
 =cut
 
 use 5.006;
-use strict; use warnings;
-
-use Carp;
-use Mouse;
-use Mouse::Util::TypeConstraints;
-
+use Data::Dumper;
 use overload ( '""'  => \&as_string );
+use Games::Cards::Pair::Params qw($Num $Value $Suit);
 
-my $SUITS  = { 'Clubs' => 1, 'Diamonds' => 1, 'Hearts' => 1, 'Spades' => 1 };
+use Moo;
+use namespace::clean;
 
-my $VALUES = { '2'   => 1, '3'    => 1, '4'     => 1, '5'    => 1, '6'     => 1,
-               '7'   => 1, '8'    => 1, '9'     => 1, '10'   => 1,
-               'Ace' => 1, 'Jack' => 1, 'Queen' => 1, 'King' => 1, 'Joker' => 1 };
-
-type 'Suits'  => where { exists $SUITS->{ucfirst(lc($_))} };
-type 'Values' => where { exists $VALUES->{ucfirst(lc($_))} };
-
-has 'suit'  => (is => 'ro', isa => 'Suits',  required => 0);
-has 'value' => (is => 'ro', isa => 'Values', required => 1);
-has 'index' => (is => 'rw', isa => 'Int',    required => 0);
+has 'index' => (is => 'rw', isa => $Num );
+has 'suit'  => (is => 'ro', isa => $Suit);
+has 'value' => (is => 'ro', isa => $Value, required => 1);
 
 =head1 DESCRIPTION
 
@@ -40,18 +30,17 @@ Only for internal use of Games::Cards::Pair class. Avoid using it directly.
 
 =cut
 
-around BUILDARGS => sub {
-    my $orig  = shift;
-    my $class = shift;
+sub BUILDARGS {
+    my ($class, $args) = @_;
 
-    if (defined($_[0]->{value}) && ($_[0]->{value} =~ /Joker/i)) {
-        die("Attribute (suit) is NOT required for Joker.") if defined $_[0]->{suit};
+    if (defined($args->{'value'}) && ($args->{'value'} =~ /Joker/i)) {
+        die("Attribute (suit) is NOT required for Joker.") if defined $args->{'suit'};
     }
     else {
-        die("Attribute (suit) is required.") unless defined $_[0]->{suit};
+        die("Attribute (suit) is required.") unless defined $args->{'suit'};
     }
 
-    return $class->$orig(@_);
+    return $args;
 };
 
 =head1 METHODS

@@ -7,16 +7,16 @@ eval { Games::Cards::Pair::Card->new(); };
 like($@, qr/Attribute \(suit\) is required/);
 
 eval { Games::Cards::Pair::Card->new({ suit => 'clubs' }); };
-like($@, qr/Attribute \(value\) is required/);
+like($@, qr/Missing required arguments: value/);
 
 eval { Games::Cards::Pair::Card->new({ value => 'queen' }); };
 like($@, qr/Attribute \(suit\) is required/);
 
-eval { Games::Cards::Pair::Card->new({ suit => 'club' }); };
-like($@, qr/Attribute \(suit\) does not pass the type constraint/);
+eval { Games::Cards::Pair::Card->new({ suit => 'club', value => 1 }); };
+like($@, qr/isa check for "suit" failed/);
 
 eval { Games::Cards::Pair::Card->new({ suit => 'clubs', value => 'queens' }); };
-like($@, qr/Attribute \(value\) does not pass the type constraint/);
+like($@, qr/isa check for "value" failed/);
 
 eval { Games::Cards::Pair::Card->new({ suit => 'clubs', value => 'joker' }); };
 like($@, qr/Attribute \(suit\) is NOT required for Joker/);

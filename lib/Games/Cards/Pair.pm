@@ -1,6 +1,6 @@
 package Games::Cards::Pair;
 
-$Games::Cards::Pair::VERSION = '0.04';
+$Games::Cards::Pair::VERSION = '0.05';
 
 =head1 NAME
 
@@ -8,39 +8,37 @@ Games::Cards::Pair - Interface to the Pelmanism (Pair) Card Game.
 
 =head1 VERSION
 
-Version 0.04
+Version 0.05
 
 =cut
 
 use 5.006;
-use strict; use warnings;
-
-use overload ( '""'  => \&as_string );
-use Mouse;
-use Mouse::Util::TypeConstraints;
-
-use Games::Cards::Pair::Card;
 use Data::Dumper;
+use overload ('""'  => \&as_string);
+
 use Attribute::Memoize;
 use List::Util qw(shuffle);
-use List::MoreUtils qw/first_index/;
+use List::MoreUtils qw(first_index);
+use Games::Cards::Pair::Params qw($ZeroOrOne $Num);
+use Games::Cards::Pair::Card;
 
-type 'ZeroOrOne' => where { /^[1|0]$/ };
+use Moo;
+use namespace::clean;
 
-has 'bank'      => (is => 'rw', isa => 'ArrayRef[Games::Cards::Pair::Card]');
-has 'seen'      => (is => 'rw', isa => 'ArrayRef[Games::Cards::Pair::Card]');
-has 'board'     => (is => 'rw', isa => 'HashRef');
-has 'available' => (is => 'ro', isa => 'ArrayRef');
-has 'count'     => (is => 'rw', isa => 'Int',       default => 0);
-has 'debug'     => (is => 'rw', isa => 'ZeroOrOne', default => 0);
+has 'bank'      => (is => 'rw');
+has 'seen'      => (is => 'rw');
+has 'board'     => (is => 'rw');
+has 'available' => (is => 'ro');
+has 'count'     => (is => 'rw', isa => $Num);
+has 'debug'     => (is => 'rw', isa => $ZeroOrOne, default => sub { return 0 });
 
 =head1 DESCRIPTION
 
-A single-player game of Pelmanism, played by the program, as of now but very soon I would make
-it an interactive game so that human can also play with it.
-A pack of cards comprises each of the  thirteen values ( 2, 3, 4, 6, 7, 8, 9, 10, Queen, King,
-Ace, Jack ) in each of the four suits ( Clubs, Diamonds, Hearts, Spades ) plus two jokers. The
-Joker will not have any suit.
+A single-player game of Pelmanism, played by the program, as of now but very soon
+I would make it an interactive game so that human can also play with it.A pack of
+cards comprises each of the thirteen values (2, 3, 4, 6, 7, 8, 9, 10, Queen, King
+, Ace, Jack ) in each of the four suits ( Clubs,  Diamonds, Hearts, Spades ) plus
+two jokers. The Joker will not have any suit.
 
 =cut
 
@@ -48,8 +46,8 @@ sub BUILD {
     my ($self) = @_;
 
     my $cards = [];
-    foreach my $suit ('Clubs', 'Diamonds', 'Hearts', 'Spades') {
-        foreach my $value ('Ace','2','3','4','5','6','7','8','9','10','Jack','Queen','King') {
+    foreach my $suit (qw(Clubs Diamonds Hearts Spades)) {
+        foreach my $value (qw(Ace 2 3 4 5 6 7 8 9 10 Jack Queen King)) {
             push @$cards, Games::Cards::Pair::Card->new({ suit => $suit, value => $value });
         }
     }
@@ -67,11 +65,12 @@ sub BUILD {
 
 =head2 draw()
 
-Returns  a  card  randomly  selected from the deck or undef if it is empty. If previously seen
-similar  value  card  then  returns that card. There are two flavours of this method, if it is
-called without any parameter then it simply returns the randomly picked card from the deck.And
-it if it's called passing a card then  it checks   whether we have seen any similar value card
-before or not.If yes then it picks that card and made the match otherwise picks another random
+Returns  a  card  randomly  selected  from  the  deck or undef if it is empty. If
+previously  seen  similar  value  card  then  returns  that  card. There  are two
+flavours  of  this  method, if it is  called without any parameter then it simply
+returns  the  randomly picked card from the deck. And it if it's called passing a
+card then  it checks   whether we have seen any similar value card before or not.
+If  yes then it picks that card and made the match otherwise picks another random
 card from the deck.
 
     use strict; use warnings;
@@ -277,11 +276,16 @@ sub _seen :Memoize {
 
 Mohammad S Anwar, C<< <mohammad.anwar at yahoo.com> >>
 
+=head1 REPOSITORY
+
+L<https://github.com/Manwar/Games-Cards-Pair>
+
 =head1 BUGS
 
-Please report any bugs / feature requests to C<bug-games-cards-pair at rt.cpan.org> or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Games-Cards-Pair>.I will
-be notified & then you'll automatically be notified of progress on your bug as I make changes.
+Please report any bugs / feature requests to C<bug-games-cards-pair at rt.cpan.org>
+or through the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Games-Cards-Pair>.
+I will be notified and then you'll automatically be  notified of progress on your
+bug as I make changes.
 
 =head1 SUPPORT
 
@@ -315,21 +319,40 @@ L<http://search.cpan.org/dist/Games-Cards-Pair/>
 
 Copyright 2012 - 2014 Mohammad S Anwar.
 
-This  program  is  free software;  you can redistribute it and/or modify it under the terms of
-either:  the  GNU  General Public License as published by the Free Software Foundation; or the
-Artistic License.
+This  program  is  free software; you can redistribute it and/or modify it under
+the  terms  of the the Artistic License (2.0). You may obtain a copy of the full
+license at:
 
-See http://dev.perl.org/licenses/ for more information.
+L<http://www.perlfoundation.org/artistic_license_2_0>
 
-=head1 DISCLAIMER
+Any  use,  modification, and distribution of the Standard or Modified Versions is
+governed by this Artistic License.By using, modifying or distributing the Package,
+you accept this license. Do not use, modify, or distribute the Package, if you do
+not accept this license.
 
-This  program  is  distributed  in  the hope that it will be useful, but WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+If your Modified Version has been derived from a Modified Version made by someone
+other than you,you are nevertheless required to ensure that your Modified Version
+ complies with the requirements of this license.
+
+This  license  does  not grant you the right to use any trademark,  service mark,
+tradename, or logo of the Copyright Holder.
+
+This license includes the non-exclusive, worldwide, free-of-charge patent license
+to make,  have made, use,  offer to sell, sell, import and otherwise transfer the
+Package with respect to any patent claims licensable by the Copyright Holder that
+are  necessarily  infringed  by  the  Package. If you institute patent litigation
+(including  a  cross-claim  or  counterclaim) against any party alleging that the
+Package constitutes direct or contributory patent infringement,then this Artistic
+License to you shall terminate on the date that such litigation is filed.
+
+Disclaimer  of  Warranty:  THE  PACKAGE  IS  PROVIDED BY THE COPYRIGHT HOLDER AND
+CONTRIBUTORS  "AS IS'  AND WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES. THE IMPLIED
+WARRANTIES    OF   MERCHANTABILITY,   FITNESS   FOR   A   PARTICULAR  PURPOSE, OR
+NON-INFRINGEMENT ARE DISCLAIMED TO THE EXTENT PERMITTED BY YOUR LOCAL LAW. UNLESS
+REQUIRED BY LAW, NO COPYRIGHT HOLDER OR CONTRIBUTOR WILL BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL,  OR CONSEQUENTIAL DAMAGES ARISING IN ANY WAY OUT OF THE USE
+OF THE PACKAGE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 =cut
-
-__PACKAGE__->meta->make_immutable;
-no Mouse;
-no Mouse::Util::TypeConstraints;
 
 1; # End of Games::Cards::Pair

@@ -1,5 +1,9 @@
 Revision history for Games-Cards-Pair
 
+0.05  Sun Oct 19 13:23:52 2014
+      - Restructured the code using 'Moo'.
+      - Added section 'Repository' to the pod document.
+
 0.04  Sun Oct 19 09:37:20 2014
       - Removed the use of 'Carp' and 'Readonly'.
       - Added Copyright year details to the pod document.
