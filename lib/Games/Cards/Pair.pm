@@ -1,6 +1,6 @@
 package Games::Cards::Pair;
 
-$Games::Cards::Pair::VERSION = '0.07';
+$Games::Cards::Pair::VERSION = '0.08';
 
 =head1 NAME
 
@@ -8,7 +8,7 @@ Games::Cards::Pair - Interface to the Pelmanism (Pair) Card Game.
 
 =head1 VERSION
 
-Version 0.07
+Version 0.08
 
 =cut
 

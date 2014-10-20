@@ -1,5 +1,8 @@
 Revision history for Games-Cards-Pair
 
+0.08  Mon Oct 20 07:15:30 2014
+      - Removed the reference of 'Mouse' from the package Games::Cards::Pair::Card.
+
 0.07  Sun Oct 19 15:40:15 2014
       - Corrected the typo in the pod document of Games::Cards::Pair::Params package.
 
